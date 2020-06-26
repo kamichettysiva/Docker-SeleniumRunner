@@ -4,7 +4,7 @@ A sample **docker-compose** file and **GitHub Workflow actions** file run docker
 ## Pre-requisite:
 - To run the docker selenium runner, we should be having a docker image with automated test cases fully dockerised
 - As an example, we are using docker image **kamichettysiva/dockertest:latest** with automated selenium test cases
-- Please refer to https://github.com/kamichettysiva/Docker-SeleniumTestNG.git project containing the source code of **kamichettysiva/dockertest:latest** and details on how to build the docker image
+- Please refer to https://github.com/kamichettysiva/Docker-SeleniumTestNG.git project containing the source code of docker image **kamichettysiva/dockertest:latest** and details on how to build the docker image
 
 
 ## SeleniumRunner Github Actions detail:
