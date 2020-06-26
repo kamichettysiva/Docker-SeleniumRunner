@@ -1,0 +1,29 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-bismuth
+    container_name: selenium-hub
+  chrome:
+    image: selenium/node-chrome:3.141.59-bismuth
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+  firefox:
+    image: selenium/node-firefox:3.141.59-bismuth
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+  search-module:
+    image: kamichettysiva/dockertest:latest
+    container_name: airasia-login-search
+    depends_on:
+      - firefox
+      - chrome
+    environment:
+      - MODULE=airasia-sample-tests.xml
+      - BROWSER=chrome
+      - HUB_HOST=selenium-hub
+    volumes:
+      - ./reports:/usr/share/tag/reports
