@@ -27,7 +27,7 @@ jobs:
         docker-compose up search-module
         docker-compose down               
 ```
-**name: Docker-SeleniumRunner** --This can be any name based on your preference <br> **on:** --This section is to specify the trigger point of your pipeline <br> **runs-on: ubuntu-latest** --Your docker will be running on this image <br> **uses: actions/checkout@v2** --Latest version of checkout action to checkout the workspace so that workflow can access it **run:** --This is the critical secton to set up the grid, run the tests and bring down the grid <br> **docker-compose up -d selenium-hub chrome firefox** --We should be running this in detached mode only by using (-d) as selenium hub will be triggerred as a server and it will not automatically go-down after the tests are completed. If we miss -d here, pipeline will run forever. As selenium-hub chrome firefox are the pre-requisites for selenium, we should be starting them first as a grid
+**name: Docker-SeleniumRunner** --This can be any name based on your preference <br> **on:** --This section is to specify the trigger point of your pipeline <br> **runs-on: ubuntu-latest** --Your docker will be running on this image <br> **uses: actions/checkout@v2** --Latest version of checkout action to checkout the workspace so that workflow can access it **run:** --This is the critical secton to set up the grid, run the tests and bring down the grid <br> **docker-compose up -d selenium-hub chrome firefox** --We should be running this in detached mode only by using (-d) as selenium hub will be triggered as a server and it will not automatically go-down after the tests are completed. If we miss -d here, pipeline will run forever. As selenium-hub, chrome, firefox are the pre-requisites for selenium, we should be starting them first as a grid
 
 ```
   selenium-hub:
@@ -47,7 +47,7 @@ jobs:
       - HUB_HOST=selenium-hub
 ```
 
-**docker-compose up search-module** --docker-compose.yml contains search module with parameters like browser, host and testng.xml (configurable), this command executes MODULE xml configured in docker compose file and once execution is completed successfully,kamichettysiva/dockertest:latest will be exited with 0, if exited with non 0, please check errors in volume mapping
+**docker-compose up search-module** --docker-compose.yml contains search module with parameters like browser, host and testng.xml (configurable), this command executes MODULE xml configured in docker compose file and once execution is completed successfully,kamichettysiva/dockertest:latest will be exited with code 0, if exited with code non 0, please check errors in volume mapping
 
 ```
 search-module:
@@ -62,7 +62,7 @@ search-module:
       - HUB_HOST=selenium-hub
 ```
 
-**docker-compose down** --This is to stop all the running contaners. i.e. selenium-hub,chrome and firefox>
+**docker-compose down** --This is to stop all the running containers. i.e. selenium-hub,chrome and firefox>
         
         
 Both docker-compose.yml file and airasia-docker-tests.yml (Under workflows) are in the repo for reference
