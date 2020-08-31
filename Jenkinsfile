@@ -1,19 +1,23 @@
 pipeline { 
     agent any 
     stages {
-        stage("Run Test") { 
-            steps {
-                sh "docker-compose up -d selenium-hub chrome firefox"
-		sh "docker-compose up search-module"    
+        stage("Create Selenium Hub") { 
+            	steps {
+                	sh "docker-compose up -d selenium-hub chrome firefox"
+		}
+        }
+	stage("Run Tests") { 
+           	 steps {
+                	sh "docker-compose up search-module"    
             }
         }
-		stage("Bring Grid Down"){
-			steps{
-				sh "docker-compose down"
-			}
+	stage("Bring Grid Down"){
+		steps{
+			sh "docker-compose down"
 		}
 	}
-	    post {
+	}
+	post {
         cleanup {
             /* clean up our workspace */
             deleteDir()
