@@ -10,26 +10,12 @@ pipeline {
             steps {
                 sh '/usr/local/bin/docker-compose up search-module'
             }
-        }
-        stage('Exit Hub') {
-            steps {
-                sh '/usr/local/bin/docker-compose down'
-            }
-        }
-	stage('Generate HTML report') {
-		steps {
-			cucumber buildStatus: 'STABLE',
-                	reportTitle: 'My report',
-                	fileIncludePattern: '**/*.json',
-                	trendsLimit: 10,
-                classifications: [
-                    [
-                        'key': 'Browser',
-                        'value': 'Firefox'
-                    ]
-                ]
-			}
-		}
+        }	
     }
+	post {
+		always{
+			archiveArtifacts artifacts:'report/**'
+			 sh '/usr/local/bin/docker-compose down'
+		}
+	}
 }
-
