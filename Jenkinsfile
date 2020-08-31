@@ -1,35 +1,21 @@
-pipeline { 
-    agent any 
+pipeline {
+    agent none
     stages {
-        stage("Create Selenium Hub") { 
-            	steps {
-                	sh "pwd"
-			
-		}
-        }
-	stage("Run Tests") { 
-           	 steps {
-                	sh "docker-compose up search-module"    
+        stage('Create Hub') {
+            steps {
+                sh 'docker-compose up -d selenium-hub chrome firefox'
             }
         }
-	stage("Bring Grid Down"){
-		steps{
-			sh "docker-compose down"
-		}
-	}
-	}
-	post {
-        cleanup {
-            /* clean up our workspace */
-            deleteDir()
-            /* clean up tmp directory */
-            dir("${workspace}@tmp") {
-                deleteDir()
-            }
-            /* clean up script directory */
-            dir("${workspace}@script") {
-                deleteDir()
+	stage('Run Test') {
+            steps {
+                sh 'docker-compose up search-module'
             }
         }
-	}
+        stage('Exit Hub') {
+            steps {
+                sh 'docker-compose down'
+            }
+        }
+        
+    }
 }
