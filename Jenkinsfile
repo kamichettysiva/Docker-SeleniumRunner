@@ -4,7 +4,7 @@ pipeline {
         stage("Create Selenium Hub") { 
             	steps {
                 	sh "pwd"
-			sh "docker-compose up -d selenium-hub chrome firefox"
+			
 		}
         }
 	stage("Run Tests") { 
