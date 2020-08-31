@@ -11,27 +11,27 @@ pipeline {
                 sh '/usr/local/bin/docker-compose up search-module'
             }
         }
+	stage('Report Extraction') {
+            steps {
+                sh '/usr/local/bin/docker-compose up volumes'
+            }
+        }
         stage('Exit Hub') {
             steps {
                 sh '/usr/local/bin/docker-compose down'
             }
-        }        
-    }
-post {
-    always {
-        cucumber buildStatus: 'UNSTABLE',
-                failedFeaturesNumber: 1,
-                failedScenariosNumber: 1,
-                skippedStepsNumber: 1,
-                failedStepsNumber: 1,
-                classifications: [
-                        [key: 'Commit', value: '<a href="${GERRIT_CHANGE_URL}">${GERRIT_PATCHSET_REVISION}</a>'],
-                        [key: 'Submitter', value: '${GERRIT_PATCHSET_UPLOADER_NAME}']
-                ],
+        }
+	stage('Generate HTML report') {
+        cucumber buildStatus: 'STABLE',
                 reportTitle: 'My report',
-                fileIncludePattern: '**/*cucumber-report.json',
-                sortingMethod: 'ALPHABETICAL',
-                trendsLimit: 100
+                fileIncludePattern: '**/*.json',
+                trendsLimit: 10,
+                classifications: [
+                    [
+                        'key': 'Browser',
+                        'value': 'Firefox'
+                    ]
+                ]
     }
-}
+    }
 }
