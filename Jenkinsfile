@@ -6,12 +6,12 @@ pipeline {
                 sh '/usr/local/bin/docker-compose up -d selenium-hub chrome firefox'
             }
         }
-	stage('Run Test') {
+		stage('Run Test') {
             steps {
                 sh '/usr/local/bin/docker-compose up search-module'
             }
         }
-	stage('Report Extraction') {
+		stage('Report Extraction') {
             steps {
                 sh '/usr/local/bin/docker-compose up volumes'
             }
@@ -21,8 +21,9 @@ pipeline {
                 sh '/usr/local/bin/docker-compose down'
             }
         }
-	stage('Generate HTML report') {
-        cucumber buildStatus: 'STABLE',
+		stage('Generate HTML report') {
+			steps {
+				cucumber buildStatus: 'STABLE',
                 reportTitle: 'My report',
                 fileIncludePattern: '**/*.json',
                 trendsLimit: 10,
@@ -32,6 +33,8 @@ pipeline {
                         'value': 'Firefox'
                     ]
                 ]
-    }
+			}
+		}
     }
 }
+
