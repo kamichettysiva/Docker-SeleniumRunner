@@ -3,12 +3,13 @@ pipeline {
     stages {
         stage("Run Test") { 
             steps {
-                sh "docker-compose up"
+                sh "docker-compose up -d selenium-hub chrome firefox"
+		sh "docker-compose up search-module"    
             }
         }
 		stage("Bring Grid Down"){
 			steps{
-				sh "docker-compose up"
+				sh "docker-compose down"
 			}
 		}
 	}
@@ -25,5 +26,5 @@ pipeline {
                 deleteDir()
             }
         }
-		}
+	}
 }
