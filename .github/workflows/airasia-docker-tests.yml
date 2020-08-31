@@ -1,4 +1,4 @@
-name: AirAsia docker test pipeline
+name: Pragra docker test pipeline
 
 on:
   push:
