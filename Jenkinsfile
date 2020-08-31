@@ -17,18 +17,21 @@ pipeline {
             }
         }        
     }
-	node {
-    	stage('Generate HTML report') {
+post {
+    always {
         cucumber buildStatus: 'UNSTABLE',
-                reportTitle: 'My report',
-                fileIncludePattern: '**/*.json',
-                trendsLimit: 10,
+                failedFeaturesNumber: 1,
+                failedScenariosNumber: 1,
+                skippedStepsNumber: 1,
+                failedStepsNumber: 1,
                 classifications: [
-                    [
-                        'key': 'Browser',
-                        'value': 'Firefox'
-                    ]
-                ]
-   	 }
-	}
+                        [key: 'Commit', value: '<a href="${GERRIT_CHANGE_URL}">${GERRIT_PATCHSET_REVISION}</a>'],
+                        [key: 'Submitter', value: '${GERRIT_PATCHSET_UPLOADER_NAME}']
+                ],
+                reportTitle: 'My report',
+                fileIncludePattern: '**/*cucumber-report.json',
+                sortingMethod: 'ALPHABETICAL',
+                trendsLimit: 100
+    }
+}
 }
