@@ -16,6 +16,10 @@ pipeline {
                 sh '/usr/local/bin/docker-compose down'
             }
         }
+	stage('cucumber reports'){
+		steps {
+			sh 'cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1'
+	}
         
     }
 }
