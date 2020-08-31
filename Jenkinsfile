@@ -15,11 +15,20 @@ pipeline {
             steps {
                 sh '/usr/local/bin/docker-compose down'
             }
-        }
-	stage('cucumber reports'){
-		steps {
-			sh 'cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1'
-	}
-        
+        }        
     }
+	node {
+    	stage('Generate HTML report') {
+        cucumber buildStatus: 'UNSTABLE',
+                reportTitle: 'My report',
+                fileIncludePattern: '**/*.json',
+                trendsLimit: 10,
+                classifications: [
+                    [
+                        'key': 'Browser',
+                        'value': 'Firefox'
+                    ]
+                ]
+   	 }
+	}
 }
