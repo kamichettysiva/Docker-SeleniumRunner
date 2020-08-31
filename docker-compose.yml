@@ -17,12 +17,12 @@ services:
       - HUB_HOST=selenium-hub
   search-module:
     image: kamichettysiva/dockertest:latest
-    container_name: airasia-login-search
+    container_name: pragra-login-search
     depends_on:
       - firefox
       - chrome
     environment:
-      - MODULE=airasia-sample-tests.xml
+      - MODULE=pragra-sample-tests.xml
       - BROWSER=chrome
       - HUB_HOST=selenium-hub
     volumes:
