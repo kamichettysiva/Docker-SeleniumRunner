@@ -1,5 +1,5 @@
 # Docker-SeleniumRunner
-A sample **docker-compose** file and **GitHub Workflow actions** file run dockerised selenium tests of a flight booking application without adding any dependencies-
+A sample **docker-compose** file and **GitHub Workflow actions** file run dockerised selenium tests of a flight booking application without adding any dependencies
 
 ## Pre-requisite:
 - To run the docker selenium runner, we should be having a docker image with automated test cases fully dockerised
