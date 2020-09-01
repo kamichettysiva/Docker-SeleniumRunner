@@ -14,10 +14,10 @@ pipeline {
     }
 	post {
 		always{
-			archiveArtifacts artifacts:'report/**'
+			archiveArtifacts artifacts:'reports/**'
 			 sh '/usr/local/bin/docker-compose down'
 			cucumber buildStatus: 'UNSTABLE',
-                	reportTitle: 'My report',
+                	reportTitle: 'Cucumber Report',
                 	fileIncludePattern: '**/*.json',
                 	trendsLimit: 10,
                 	classifications: [
