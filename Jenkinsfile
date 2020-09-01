@@ -16,7 +16,16 @@ pipeline {
 		always{
 			archiveArtifacts artifacts:'report/**'
 			 sh '/usr/local/bin/docker-compose down'
-		}
+			cucumber buildStatus: 'UNSTABLE',
+                	reportTitle: 'My report',
+                	fileIncludePattern: '**/*.json',
+                	trendsLimit: 10,
+                	classifications: [
+                    		[
+                        	'key': 'Browser',
+                        	'value': 'chrome'
+                    		]
+               		]
 	}
 }
 
