@@ -26,4 +26,4 @@ services:
       - BROWSER=chrome
       - HUB_HOST=selenium-hub 
     volumes:
-      - ./report:/usr/share/tag/reports
+      - ./reports:/usr/share/tag/reports
