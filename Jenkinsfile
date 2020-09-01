@@ -26,6 +26,7 @@ pipeline {
                         	'value': 'chrome'
                     		]
                		]
+		}
 	}
 }
 
