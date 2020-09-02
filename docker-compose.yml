@@ -23,7 +23,7 @@ services:
       - chrome
     environment:
       - MODULE=pragra-sample-tests.xml
-      - BROWSER=chrome
+      - BROWSER=firefox
       - HUB_HOST=selenium-hub 
     volumes:
       - ./reports:/usr/share/tag/reports
