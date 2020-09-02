@@ -18,7 +18,7 @@ pipeline {
 			 sh '/usr/local/bin/docker-compose down'
 			cucumber buildStatus: 'UNSTABLE',
                 	reportTitle: 'Cucumber Report',
-                	fileIncludePattern: '**/*.json',
+                	fileIncludePattern: '**/cucumber-html-report.json',
                 	trendsLimit: 10,
                 	classifications: [
                     		[
