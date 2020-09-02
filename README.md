@@ -10,7 +10,7 @@ A sample **docker-compose** file and **GitHub Workflow actions** file run docker
 ## SeleniumRunner Github Actions detail:
 
 ```
-name: AirAsia docker test pipeline
+name: Pragra docker test pipeline
 on:
   push:
     branches: [ master ]
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Run AirAsia sample E2E tests in a docker container
+    - name: Run Pragra sample E2E tests in a docker container
       run: |
         docker-compose up -d selenium-hub chrome firefox
         docker-compose up search-module
@@ -52,12 +52,12 @@ jobs:
 ```
 search-module:
     image: kamichettysiva/dockertest:latest
-    container_name: airasia-login-search
+    container_name: Pragra-login-search
     depends_on:
       - firefox
       - chrome
     environment:
-      - MODULE=airasia-sample-tests.xml
+      - MODULE=Pragra-sample-tests.xml
       - BROWSER=chrome
       - HUB_HOST=selenium-hub
 ```
@@ -65,4 +65,4 @@ search-module:
 **docker-compose down** --This is to stop all the running containers. i.e. selenium-hub,chrome and firefox>
         
         
-Both docker-compose.yml file and airasia-docker-tests.yml (Under workflows) are in the repo for reference
+Both docker-compose.yml file and Pragra-docker-tests.yml (Under workflows) are in the repo for reference
