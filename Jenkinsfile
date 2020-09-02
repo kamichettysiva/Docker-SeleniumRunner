@@ -8,6 +8,7 @@ pipeline {
         }
 		stage('Run Test') {
             steps {
+		sh 'docker image rm kamichettysiva/dockertest:latest'    
                 sh '/usr/local/bin/docker-compose up search-module'
             }
         }	
