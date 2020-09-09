@@ -65,4 +65,5 @@ search-module:
 **docker-compose down** --This is to stop all the running containers. i.e. selenium-hub,chrome and firefox>
         
         
-Both docker-compose.yml file and Pragra-docker-tests.yml (Under workflows) are in the repo for reference 
+Both docker-compose.yml file and Pragra-docker-tests.yml (Under workflows) are in the repo for reference
+
