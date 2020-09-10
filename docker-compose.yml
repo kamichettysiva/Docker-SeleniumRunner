@@ -27,3 +27,4 @@ services:
       - HUB_HOST=selenium-hub 
     volumes:
       - ./reports:/usr/share/tag/reports
+
